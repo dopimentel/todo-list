@@ -11,4 +11,23 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
+function createTable() {
+  return new Promise((resolve, reject) => {
+    db.serialize(() => {
+      db.run(`CREATE TABLE IF NOT EXISTS tasks (
+        id TEXT PRIMARY KEY,
+        description TEXT NOT NULL,
+        check BOOLEAN NOT NULL DEFAULT 0
+      )`, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+    });
+}
+
 export default db;
+export { createTable };
