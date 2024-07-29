@@ -3,7 +3,7 @@ import TaskContext from '../../context/taskContext';
 
 
 function ItemList() {
-    const { tasks, toggleCheck } = useContext(TaskContext);
+    const { tasks, toggleCheck, removeTask } = useContext(TaskContext);
 
     useEffect(() => {
         console.log('tasks:', tasks);
@@ -19,6 +19,8 @@ function ItemList() {
                         onChange={ () => toggleCheck(index) }
                     />
                     { task.description }
+
+                    <button onClick={ () => removeTask(index) }>Remove</button>
                 </li>
             )) }
         </ul>

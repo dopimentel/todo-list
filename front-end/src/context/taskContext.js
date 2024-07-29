@@ -20,11 +20,17 @@ export function TaskProvider ({ children }) {
     setTasks(updatedTasks);
   };
 
+  const removeTask = (index) => {
+    const updatedTasks = tasks.filter((task, i) => i !== index);
+    setTasks(updatedTasks);
+  }
+
 
   const contextValue = {
     tasks,
     addTask,
     toggleCheck,
+    removeTask,
   };
 
   return (
