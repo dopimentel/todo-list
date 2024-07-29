@@ -16,7 +16,7 @@ function ItemList() {
                     <input
                         type="checkbox"
                         checked={ task.check }
-                        onChange={ () => toggleCheck(index) }
+                        onChange={ () => toggleCheck(task.description) }
                     />
                     { task.description }
 

@@ -11,9 +11,9 @@ export function TaskProvider ({ children }) {
     setTasks([ ...tasks, newTask ]);
   };
   
-  const toggleCheck = (index) => {
-    const updatedTasks = tasks.map((task, i) => {
-      if (i === index) {
+  const toggleCheck = (description) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.description === description) {
         return { ...task, check: !task.check };
       }
       return task;
