@@ -1,11 +1,14 @@
 // import logo from './logo.svg';
 import './App.css';
+import { TaskProvider } from './context/taskContext';
 
 function App() {
   return (
-    <div className="App">
+    <TaskProvider>
+      <div className="App">
       <h1>To Do List</h1>
-    </div>
+      </div>
+    </TaskProvider>
   );
 }
 
