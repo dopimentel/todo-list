@@ -55,6 +55,10 @@ export function TaskProvider ({ children }) {
     }
     catch (err) {
       console.error(err);
+      if (err.response.status === 404) {
+        alert('Task not found');
+        getTasks();
+      }
     }
   };
 
@@ -65,6 +69,10 @@ export function TaskProvider ({ children }) {
     }
     catch (err) {
       console.error(err);
+      if (err.response.status === 404) {
+        alert('Task not found');
+        getTasks();
+      }
     }
   }
 
@@ -89,23 +97,18 @@ export function TaskProvider ({ children }) {
   }) : [];
 
   useEffect(() => {
-    const storedTasks = localStorage.getItem('tasks');
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    } else {
-      const fetchTasks = async () => {
-        try
-        {
-          const { data } = await tasksApi("GET", "/tasks");
-          setTasks(data);
-          saveTasks(data);
-        }
-        catch (err) {
-          console.error(err);
-        }
-      };
-      fetchTasks();
-    }
+    const fetchTasks = async () => {
+      try
+      {
+        const { data } = await tasksApi("GET", "/tasks");
+        setTasks(data);
+        saveTasks(data);
+      }
+      catch (err) {
+        console.error(err);
+      }
+    };
+    fetchTasks();
   }, []);
 
 
