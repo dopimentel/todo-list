@@ -3,15 +3,15 @@ import TaskContext from '../../context/taskContext';
 
 
 function ItemList() {
-    const { tasks, toggleCheck, removeTask } = useContext(TaskContext);
+    const { filteredTasks, toggleCheck, removeTask } = useContext(TaskContext);
 
     useEffect(() => {
-        console.log('tasks:', tasks);
-    }, [tasks]);
+        console.log('tasks:', filteredTasks);
+    },);
 
     return (
         <ul>
-            { tasks.map((task, index) => (
+            { filteredTasks.length > 0 && filteredTasks.map((task, index) => (
                 <li key={ index }>
                     <input
                         type="checkbox"

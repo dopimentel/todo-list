@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-
+import tasksApi from "../utils/fetch";
 const TaskContext = createContext();
 
 export function TaskProvider ({ children }) {
@@ -11,6 +11,10 @@ export function TaskProvider ({ children }) {
     return [];
   }
   );
+
+  const saveTasks = (tasks) => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
 
   const [filter, setFilter] = useState(() => {
     const savedFilter = localStorage.getItem('filter');
@@ -45,7 +49,7 @@ export function TaskProvider ({ children }) {
     localStorage.setItem('filter', filter);
   };
 
-  const filteredTasks = tasks.filter((task) => {
+  const filteredTasks = tasks ? tasks.filter((task) => {
     if (filter === 'all') {
       saveFilter(filter);
       return true;
@@ -59,21 +63,31 @@ export function TaskProvider ({ children }) {
       return !task.check;
     }
     return true;
-  });
+  }) : [];
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    } else {
+      const fetchTasks = async () => {
+        const { data } = await tasksApi("GET", "/tasks");
+        setTasks(data);
+        saveTasks(data);
+      };
+      fetchTasks();
+    }
+  }, []);
 
 
   const contextValue = {
-    tasks: filteredTasks,
+    tasks,
+    filteredTasks,
     filter,
     addTask,
     toggleCheck,
     removeTask,
     setFilter,
-
   };
 
   return (
