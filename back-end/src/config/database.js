@@ -17,7 +17,7 @@ function createTable() {
         CREATE TABLE IF NOT EXISTS tasks (
           id TEXT PRIMARY KEY,
           description TEXT NOT NULL,
-          "check" INTEGER NOT NULL
+          "check" BOOLEAN NOT NULL DEFAULT 0
           );`, (err) => {
         if (err) {
           reject(err);
