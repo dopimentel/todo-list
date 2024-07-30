@@ -20,8 +20,19 @@ const createTask = async (description) => {
     db.run('INSERT INTO tasks (id, description) VALUES (?, ?)', id, description);
     };
 
-const updateTask = async (id, check) => {
-    db.run('UPDATE tasks SET "check" = ? WHERE id = ?', check, id);
+const updateTask = async ({ id, description, check }) => {
+    return new Promise((resolve, reject) => {
+        db.run(
+            `UPDATE tasks SET description = ?, "check" = ? WHERE id = ?`,
+            [description, check, id],
+            function (err) {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(this.changes); // `this.changes` contains the number of rows affected
+            }
+        );
+    });
 };
 
 function deleteTask(id) {

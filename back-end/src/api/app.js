@@ -13,7 +13,7 @@ app.use(morgan('tiny'));
 
 app.get("/tasks", tasksController.getAllTasks);
 app.post("/tasks", tasksController.createTask);
-app.patch("/tasks/:id", tasksController.updateTask);
+app.put("/tasks/:id", tasksController.updateTask);
 app.delete("/tasks/:id", tasksController.deleteTask);
 
 module.exports = app;

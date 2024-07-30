@@ -27,8 +27,10 @@ const createTask = async (req, res) => {
 const updateTask = async (req, res) => {
     try {
         const { id } = req.params;
-        const { check } = req.body;
-        await taskModel.updateTask(id, check);
+        const affectedRows =  await taskModel.updateTask({...req.body, id });
+        if (affectedRows === 0) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
         res.status(200).json({ message: 'Task updated successfully' });
     }
     catch (err) {

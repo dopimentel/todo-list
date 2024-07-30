@@ -48,9 +48,14 @@ export function TaskProvider ({ children }) {
   }
   
   const toggleCheck = async (task) => {
-    const { id, check } = task;
-    await tasksApi("PATCH", `/tasks/${id}`, { check: !check });
-    await getTasks();
+    const { id, description, check } = task;
+    try {
+      await tasksApi("PUT", `/tasks/${id}`, { id, description, check: !check });
+      await getTasks();
+    }
+    catch (err) {
+      console.error(err);
+    }
   };
 
   const removeTask = async (id) => {
