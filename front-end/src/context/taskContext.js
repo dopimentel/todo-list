@@ -12,7 +12,14 @@ export function TaskProvider ({ children }) {
   }
   );
 
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState(() => {
+    const savedFilter = localStorage.getItem('filter');
+    if (savedFilter) {
+      return savedFilter;
+    }
+    return 'all';
+  }
+  );
 
   const addTask = (description) => {
     const newTask = { description, check: false };
@@ -34,14 +41,21 @@ export function TaskProvider ({ children }) {
     setTasks(updatedTasks);
   }
 
+  const saveFilter = (filter) => {
+    localStorage.setItem('filter', filter);
+  };
+
   const filteredTasks = tasks.filter((task) => {
     if (filter === 'all') {
+      saveFilter(filter);
       return true;
     }
     if (filter === 'checked') {
+      saveFilter(filter);
       return task.check;
     }
     if (filter === 'unchecked') {
+      saveFilter(filter);
       return !task.check;
     }
     return true;
