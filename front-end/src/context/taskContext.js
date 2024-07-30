@@ -47,14 +47,10 @@ export function TaskProvider ({ children }) {
     }
   }
   
-  const toggleCheck = (description) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.description === description) {
-        return { ...task, check: !task.check };
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
+  const toggleCheck = async (task) => {
+    const { id, check } = task;
+    await tasksApi("PATCH", `/tasks/${id}`, { check: !check });
+    await getTasks();
   };
 
   const removeTask = async (id) => {
