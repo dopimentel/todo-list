@@ -2,9 +2,10 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/api/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ."
   },
   "keywords": [],
   "author": "",
@@ -13,8 +14,8 @@
     "cors": "2.8.5",
     "express": "4.18.2",
     "morgan": "1.10.0",
-    "uuid": "8.3.2",
-    "sqlite3": "5.0.2"
+    "sqlite3": "^5.1.7",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "nodemon": "2.0.12"

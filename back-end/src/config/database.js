@@ -1,7 +1,6 @@
-import sqlite3 from 'sqlite3';
-import { join } from 'path';
-
-const dbPath = join(__dirname, '..', 'database.db');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const dbPath = path.join(__dirname, '..', 'database.db');
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
@@ -14,11 +13,12 @@ const db = new sqlite3.Database(dbPath, (err) => {
 function createTable() {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
-      db.run(`CREATE TABLE IF NOT EXISTS tasks (
-        id TEXT PRIMARY KEY,
-        description TEXT NOT NULL,
-        check BOOLEAN NOT NULL DEFAULT 0
-      )`, (err) => {
+      db.run(`
+        CREATE TABLE IF NOT EXISTS tasks (
+          id TEXT PRIMARY KEY,
+          description TEXT NOT NULL,
+          "check" INTEGER NOT NULL
+          );`, (err) => {
         if (err) {
           reject(err);
         } else {
@@ -29,5 +29,4 @@ function createTable() {
     });
 }
 
-export default db;
-export { createTable };
+module.exports = { db, createTable };
