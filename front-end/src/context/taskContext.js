@@ -25,10 +25,27 @@ export function TaskProvider ({ children }) {
   }
   );
 
-  const addTask = (description) => {
-    const newTask = { description, check: false };
-    setTasks([ ...tasks, newTask ]);
-  };
+  const getTasks = async () => {
+    try
+    {
+      const { data } = await tasksApi("GET", "/tasks");
+      setTasks(data);
+      saveTasks(data);
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
+
+  const addTask = async (description) => {
+    try {
+      await tasksApi("POST", "/tasks", { description });
+      getTasks();
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
   
   const toggleCheck = (description) => {
     const updatedTasks = tasks.map((task) => {
@@ -71,9 +88,15 @@ export function TaskProvider ({ children }) {
       setTasks(JSON.parse(storedTasks));
     } else {
       const fetchTasks = async () => {
-        const { data } = await tasksApi("GET", "/tasks");
-        setTasks(data);
-        saveTasks(data);
+        try
+        {
+          const { data } = await tasksApi("GET", "/tasks");
+          setTasks(data);
+          saveTasks(data);
+        }
+        catch (err) {
+          console.error(err);
+        }
       };
       fetchTasks();
     }
