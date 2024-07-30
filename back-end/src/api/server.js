@@ -1,15 +1,9 @@
-const express = require('express');
+const app = require('../api/app');
 const { createTable } = require('../config/database');
-const app = express();
 const PORT = process.env.PORT || 3001;
 
 createTable()
   .then(() => {
-    app.use(express.json());
-    app.get('/tasks', (req, res) => {
-        res.send('Hello World!');
-    });
-
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
