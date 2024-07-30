@@ -3,7 +3,7 @@ const taskModel = require('../models/taskModel');
 const getAllTasks = async (_req, res) => {
     try {
         const tasks = await taskModel.getAllTasks();
-        res.status(200).json(tasks);
+        res.status(200).json({ data: tasks });
     }
     catch (err) {
         res.status(500).json({ message: err.message });
@@ -43,7 +43,7 @@ const deleteTask = async (req, res) => {
         if (affectedRows === 0) {
             return res.status(404).json({ message: 'Task not found' });
         }
-        res.status(200).json({ message: 'Task deleted successfully' });
+        res.status(204).end();
     }
     catch (err) {
         res.status(500).json({ message: err.message });
