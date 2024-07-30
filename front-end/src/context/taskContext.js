@@ -40,7 +40,7 @@ export function TaskProvider ({ children }) {
   const addTask = async (description) => {
     try {
       await tasksApi("POST", "/tasks", { description });
-      getTasks();
+      await getTasks();
     }
     catch (err) {
       console.error(err);
@@ -57,9 +57,14 @@ export function TaskProvider ({ children }) {
     setTasks(updatedTasks);
   };
 
-  const removeTask = (index) => {
-    const updatedTasks = tasks.filter((task, i) => i !== index);
-    setTasks(updatedTasks);
+  const removeTask = async (id) => {
+    try {
+      await tasksApi("DELETE", `/tasks/${id}`);
+      await getTasks();
+    }
+    catch (err) {
+      console.error(err);
+    }
   }
 
   const saveFilter = (filter) => {

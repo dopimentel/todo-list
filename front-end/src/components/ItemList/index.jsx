@@ -20,7 +20,7 @@ function ItemList() {
                     />
                     { task.description }
 
-                    <button onClick={ () => removeTask(index) }>Remove</button>
+                    <button onClick={ () => removeTask(task.id) }>Remove</button>
                 </li>
             )) }
         </ul>
