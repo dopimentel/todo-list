@@ -1,14 +1,10 @@
 // import logo from './logo.svg';
 import './App.css';
+import styled, { createGlobalStyle } from 'styled-components';
 import { TaskProvider } from './context/taskContext';
 import ItemFilter from './components/ItemFilter';
 import ItemAdd from './components/ItemAdd';
 import ItemList from './components/ItemList';
-import styled from 'styled-components';
-
-import { createGlobalStyle } from 'styled-components';
-
-  
 
 const GlobalStyle = createGlobalStyle`
 
@@ -18,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Arial', sans-serif;
     background-color: #faedd9;
   }
-`
+`;
 
 function App() {
   const Title = styled.h1`
@@ -32,11 +28,11 @@ function App() {
   return (
     <TaskProvider>
       <>
-      <GlobalStyle/>
+        <GlobalStyle />
         <Title>
-        <h1>To Do List</h1>
+          To Do List
         </Title>
-        
+
         <ItemFilter />
         <ItemAdd />
         <ItemList />
