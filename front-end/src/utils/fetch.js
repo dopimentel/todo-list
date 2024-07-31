@@ -5,7 +5,7 @@ const PORT = process.env.REACT_APP_API_PORT || 3001;
 
 const fetch = axios.create({
   baseURL: `http://${HOST}:${PORT}`,
-  timeout: 1000,
+  timeout: 3000,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
