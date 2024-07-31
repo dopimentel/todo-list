@@ -13,9 +13,10 @@ const FilterContainer = styled.div`
 
 const FilterSelect = styled.select`
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
+  /* background-color: ${({ theme }) => theme.secondaryColor}; */
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
 `;
 
 function ItemFilter() {

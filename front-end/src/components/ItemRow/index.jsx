@@ -18,16 +18,61 @@ const TaskRowContainer = styled.div`
 `;
 
 const TaskCheckbox = styled.input`
-  margin-right: 10px;
+  appearance: none; /* Remove default appearance */
+  -webkit-appearance: none; /* Remove default appearance on WebKit */
+  width: 24px; /* Size of the checkbox */
+  height: 24px; /* Size of the checkbox */
+  border-radius: 4px; /* Rounded corners */
+  background-color: ${({ checked }) => (
+    checked ? '#4caf50' : '#fff'
+  )}; /* Background color */
+  border: 2px solid #ccc; /* Border color */
   cursor: pointer;
-  @media (min-width: 768px)
-  margin-right: 20px;
+  position: relative;
+  transition: background-color 0.2s, border-color 0.2s;
+
+  @media (min-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+
+  &:checked {
+    background-color: #4caf50; /* Checked background color */
+    border-color: #4caf50; /* Border color when checked */
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 6px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transform: translate(-50%, -50%);
+    opacity: ${({ checked }) => (checked ? 1 : 0)};
+    transition: opacity 0.2s;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3); /* Focus outline */
+  }
 `;
 
 const TaskText = styled.span`
-  flex: 1.5;
-  font-size: 1rem;
-  text-decoration: ${({ check }) => (check ? 'line-through' : 'none')};
+    flex: 1;
+    font-size: 16px;  /* Tamanho da fonte */
+    color: ${({ check }) => (check ? '#9e9e9e' : '#333')};  /* Cor do texto */
+    text-decoration: ${({ check }) => (check ? 'line-through' : 'none')};
+    /* Decoração do texto */
+    transition: color 0.3s, text-decoration 0.3s;  /* Transição suave */
+    margin-left: 10px;  /* Espaçamento à esquerda */
+    padding: 5px;  /* Espaçamento interno */
+    display: flex;
+    align-items: center;  /* Alinha o texto verticalmente */
 `;
 
 const TaskInput = styled.input`

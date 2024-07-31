@@ -4,10 +4,21 @@ import TaskContext from '../../context/taskContext';
 import ItemRow from '../ItemRow';
 
 const TaskListContainer = styled.ul`
-  margin: 10px;
+  /* list-style: none; */
+  /* margin: 5px;
   @media (min-width: 768px) {
-    margin: 20px;
-  }
+    margin: 10px;
+  } */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;  /* Espaçamento entre os itens */
+  width: 100%;
+  background-color: ${({ theme }) => theme.secondaryColor};
+  /* @media (min-width: 768px) {
+    gap: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+  } */
 `;
 
 function ItemList() {
