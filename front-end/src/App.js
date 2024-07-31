@@ -1,42 +1,72 @@
 // import logo from './logo.svg';
-import './App.css';
-import styled from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { TaskProvider } from './context/taskContext';
 import ItemFilter from './components/ItemFilter';
 import ItemAdd from './components/ItemAdd';
 import ItemList from './components/ItemList';
+import { theme } from './styles/theme';
 
-// const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 
-//   body {
-//     margin: 0;
-//     padding: 0;
-//     font-family: 'Arial', sans-serif;
-//     background-color: #faedd9;
-//   }
-// `;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #808f12;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: ${theme.containerBackground};
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.8);
+  min-height: 100vh;
+
+  @media (min-width: 768px) {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+  }
+`;
+const Title = styled.h1`
+text-transform: uppercase;
+transform: scale(1, 1.1);
+font-weight: bold;
+font-size: 18px;
+letter-spacing: 12px;
+color: ${({ theme: localTheme }) => localTheme.primaryColor};
+`;
 
 function App() {
-  const Title = styled.h1`
-  text-transform: uppercase;
-  transform: scale(1, 1.1);
-  font-weight: bold;
-  font-size: 18px;
-  letter-spacing: 12px;
-  color: #2a5c0b;
-  `;
   return (
-    <TaskProvider>
-      <>
-        <Title>
-          To Do List
-        </Title>
+    <ThemeProvider theme={ theme }>
+      <TaskProvider>
+        <GlobalStyle />
+        <Container>
+          <Title>
+            To Do List
+          </Title>
 
-        <ItemFilter />
-        <ItemAdd />
-        <ItemList />
-      </>
-    </TaskProvider>
+          <ItemFilter />
+          <ItemAdd />
+          <ItemList />
+        </Container>
+      </TaskProvider>
+    </ThemeProvider>
   );
 }
 

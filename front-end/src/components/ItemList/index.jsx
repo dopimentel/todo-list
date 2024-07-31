@@ -1,6 +1,14 @@
 import React, { useContext, useEffect } from 'react';
+import styled from 'styled-components';
 import TaskContext from '../../context/taskContext';
 import ItemRow from '../ItemRow';
+
+const TaskListContainer = styled.ul`
+  margin: 10px;
+  @media (min-width: 768px) {
+    margin: 20px;
+  }
+`;
 
 function ItemList() {
   const { filteredTasks } = useContext(TaskContext);
@@ -10,7 +18,7 @@ function ItemList() {
   });
 
   return (
-    <ul>
+    <TaskListContainer>
       { filteredTasks
         .length > 0 && filteredTasks
         .map(({ id, description, check }, index) => (
@@ -21,7 +29,7 @@ function ItemList() {
             check={ check }
           />
         )) }
-    </ul>
+    </TaskListContainer>
   );
 }
 
