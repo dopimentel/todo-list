@@ -7,6 +7,7 @@ import TaskContext from '../../context/taskContext';
 const TaskRowContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 10px;
   background-color: white;
   margin: 10px 0;
@@ -14,6 +15,8 @@ const TaskRowContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   @media (min-width: 768px) {
     padding: 15px;
+    margin-right: 2rem;
+    margin-left: 2rem;
   }
 `;
 
@@ -67,6 +70,7 @@ const TaskText = styled.span`
     font-size: 16px;  /* Tamanho da fonte */
     color: ${({ check }) => (check ? '#9e9e9e' : '#333')};  /* Cor do texto */
     text-decoration: ${({ check }) => (check ? 'line-through' : 'none')};
+    font-weight: ${({ check }) => (check ? 'normal' : 'bold')};  /* Negrito */
     /* Decoração do texto */
     transition: color 0.3s, text-decoration 0.3s;  /* Transição suave */
     margin-left: 10px;  /* Espaçamento à esquerda */

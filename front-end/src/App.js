@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background-color: #808f12;
+    background-color: ${({ theme: localTheme }) => localTheme.backgroundColor};
   }
 `;
 
@@ -29,8 +29,9 @@ const Container = styled.div`
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
-  background-color: ${theme.containerBackground};
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.8);
+  /* background-color: ${theme.containerBackground}; */
+  background-color: #F8F8FF;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.6);
   min-height: 100vh;
 
   @media (min-width: 768px) {
@@ -38,7 +39,7 @@ const Container = styled.div`
     margin: 0 auto;
     margin-top: 30px;
     margin-bottom: 30px;
-    box-shadow: 0 0 32px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
   }
 `;

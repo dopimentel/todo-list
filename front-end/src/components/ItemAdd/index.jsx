@@ -36,7 +36,9 @@ const AddButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.secondaryColor};
+    color: ${({ theme }) => theme.primaryColor};
+    background-color: ${({ theme }) => theme.containerBackground};
+    border: 1px solid ${({ theme }) => theme.primaryColor};
   }
 `;
 

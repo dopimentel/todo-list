@@ -9,16 +9,17 @@ const TaskListContainer = styled.ul`
   @media (min-width: 768px) {
     margin: 10px;
   } */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 10px;  /* Espaçamento entre os itens */
+  gap: 5px;  /* Espaçamento entre os itens */
   width: 100%;
-  background-color: ${({ theme }) => theme.secondaryColor};
-  /* @media (min-width: 768px) {
-    gap: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
-  } */
+  background-color: ${({ theme }) => theme.backgroundColor};
+  @media (min-width: 768px) {
+    background-color: ${({ theme }) => theme.containerBackground};
+  }
 `;
 
 function ItemList() {
