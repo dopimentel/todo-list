@@ -5,8 +5,8 @@ import tasksApi from '../utils/fetch';
 
 const SUCCESS_STATUS = 200;
 const NO_CONTENT_STATUS = 204;
-const NOT_FOUND_STATUS = 404;
 const CREATED_STATUS = 201;
+const TIME = 2000;
 
 const TaskContext = createContext();
 
@@ -46,7 +46,6 @@ export function TaskProvider({ children }) {
   const addTask = async (description) => {
     try {
       const response = await tasksApi('POST', '/tasks', { description });
-      console.log(response.data);
       if (response.status === CREATED_STATUS) {
         const newTask = response.data;
         const newTasks = [...tasks, newTask];
@@ -79,10 +78,14 @@ export function TaskProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-      if (err.response.status === NOT_FOUND_STATUS) {
-        console.log('Task not found');
-        getTasks();
-      }
+      setError('Erro ao atualizar tarefa');
+      setTimeout(
+        () => {
+          setError('');
+        },
+        TIME,
+      );
+      getTasks();
     }
   };
 
@@ -96,11 +99,14 @@ export function TaskProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-      if (err.response.status === NOT_FOUND_STATUS) {
-        console.log('Task not found');
-        getTasks();
-        saveTasks(tasks);
-      }
+      setError('Erro ao deletar tarefa');
+      setTimeout(
+        () => {
+          setError('');
+        },
+        TIME,
+      );
+      getTasks();
     }
   };
 

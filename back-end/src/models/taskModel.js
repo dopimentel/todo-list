@@ -30,7 +30,8 @@ const updateTask = async ({ id, description, check }) => {
                 if (err) {
                     return reject(err);
                 }
-                resolve(this.changes); // `this.changes` contains the number of rows affected
+                const updatedTask = { id, description, check };
+                resolve({updatedTask, affectedRows: this.changes}); // this.changes contains the number of rows affected
             }
         );
     });
