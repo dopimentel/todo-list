@@ -4,6 +4,9 @@ import { Add } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import TaskContext from '../../context/taskContext';
 
+const TIME = 2000;
+const maxLength = 20;
+
 const CustomIconButton = styled(IconButton)`
   background-color: #4caf50 !important;
 
@@ -38,6 +41,13 @@ const TaskInput = styled.input`
   }
 `;
 
+const ErrorText = styled.p`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
+
 // const AddButton = styled.button`
 //   padding: 10px;
 //   font-size: 16px;
@@ -55,27 +65,45 @@ const TaskInput = styled.input`
 // `;
 
 function ItemAdd() {
-  const { addTask } = useContext(TaskContext);
+  const { addTask, error, setError } = useContext(TaskContext);
   const [description, setDescription] = useState('');
 
   const handleAddTask = () => {
     if (!description) {
-      return;
+      setError('Preencha o campo acima');
+      setTimeout(() => {
+        setError('');
+      }, TIME);
     }
     addTask(description);
     setDescription('');
   };
 
+  const handleChange = (e) => {
+    if (e.target.value.length <= maxLength) {
+      setDescription(e.target.value);
+      setError('');
+    } else {
+      setError('Limite de caracteres atingido');
+      setTimeout(() => {
+        setError('');
+      }, TIME);
+    }
+  };
+
   return (
-    <AddTaskContainer>
-      <TaskInput
-        type="text"
-        value={ description }
-        onChange={ (e) => setDescription(e.target.value) }
-        placeholder="Adicione uma tarefa"
-      />
-      <CustomIconButton onClick={ handleAddTask }><Add /></CustomIconButton>
-    </AddTaskContainer>
+    <>
+      <AddTaskContainer>
+        <TaskInput
+          type="text"
+          value={ description }
+          onChange={ handleChange }
+          placeholder={ error ? 'Campo obrigatório' : 'Adicionar tarefa' }
+        />
+        <CustomIconButton onClick={ handleAddTask }><Add /></CustomIconButton>
+      </AddTaskContainer>
+      {error && <ErrorText>{error}</ErrorText>}
+    </>
   );
 }
 

@@ -17,6 +17,8 @@ export function TaskProvider({ children }) {
     return [];
   });
 
+  const [error, setError] = useState('');
+
   const saveTasks = (newTasks) => {
     localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
@@ -135,11 +137,23 @@ export function TaskProvider({ children }) {
     tasks,
     filteredTasks,
     filter,
+    error,
     addTask,
     toggleCheck,
     removeTask,
     setFilter,
-  }), [tasks, filteredTasks, filter, addTask, toggleCheck, removeTask, setFilter]);
+    setError,
+  }), [
+    error,
+    tasks,
+    filteredTasks,
+    filter,
+    addTask,
+    toggleCheck,
+    removeTask,
+    setFilter,
+    setError,
+  ]);
 
   return (
     <TaskContext.Provider value={ contextValue }>
