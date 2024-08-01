@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState, useMemo, useCallback } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import tasksApi from '../utils/fetch';
 
@@ -30,7 +31,7 @@ export function TaskProvider({ children }) {
     }
     return 'all';
   });
-  const getTasks = useCallback(async () => {
+  const getTasks = async () => {
     try {
       const { data } = await tasksApi('GET', '/tasks');
       setTasks(data);
@@ -38,19 +39,18 @@ export function TaskProvider({ children }) {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  };
 
-  const addTask = useCallback(async (description) => {
+  const addTask = async (description) => {
     try {
       await tasksApi('POST', '/tasks', { description });
       await getTasks();
     } catch (err) {
       console.error(err);
     }
-  }, [getTasks]);
+  };
 
-  const toggleCheck = useCallback(async (t) => {
-    const { id, description, check } = t;
+  const toggleCheck = async ({ id, description, check }) => {
     const updatedTask = {
       id,
       description,
@@ -75,9 +75,9 @@ export function TaskProvider({ children }) {
         getTasks();
       }
     }
-  }, [tasks, getTasks]);
+  };
 
-  const removeTask = useCallback(async (id) => {
+  const removeTask = async (id) => {
     try {
       const response = await tasksApi('DELETE', `/tasks/${id}`);
       if (response.status === NO_CONTENT_STATUS) {
@@ -93,7 +93,7 @@ export function TaskProvider({ children }) {
         saveTasks(tasks);
       }
     }
-  }, [tasks, getTasks]);
+  };
 
   const saveFilter = (newFilter) => {
     localStorage.setItem('filter', newFilter);
@@ -121,16 +121,7 @@ export function TaskProvider({ children }) {
   }, [tasks, filter]);
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const { data } = await tasksApi('GET', '/tasks');
-        setTasks(data);
-        saveTasks(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchTasks();
+    getTasks();
   }, []);
 
   const contextValue = useMemo(() => ({
