@@ -114,7 +114,7 @@ const IconButton = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
 `;
 
@@ -127,7 +127,7 @@ const IconDeleteButton = styled.button`
   &:hover {
     color: red;
     background: white;
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
 `;
 

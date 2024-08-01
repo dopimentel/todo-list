@@ -23,7 +23,7 @@ const TaskListContainer = styled.ul`
 `;
 
 function ItemList() {
-  const { filteredTasks } = useContext(TaskContext);
+  const { filteredTasks, filter } = useContext(TaskContext);
 
   useEffect(() => {
     console.log('tasks:', filteredTasks);
@@ -45,7 +45,8 @@ function ItemList() {
     )
       : (
         <p>
-          Nenhuma tarefa
+          Nenhuma tarefa.
+          { filter !== 'all' ? ' Tente outro filtro.' : '' }
         </p>
       )
   );

@@ -36,19 +36,33 @@ const Container = styled.div`
   @media (min-width: 768px) {
     width: 60%;
     margin: 0 auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     box-shadow: 0 0 32px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
   }
 `;
 const Title = styled.h1`
 text-transform: uppercase;
-transform: scale(1, 1.1);
-font-weight: bold;
-font-size: 18px;
-letter-spacing: 12px;
-color: ${({ theme: localTheme }) => localTheme.primaryColor};
+  transform: scale(1, 1.1);
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: 8px;
+  color: ${theme.primaryColor};
+  margin: 20px 0;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    font-size: 32px;
+    letter-spacing: 10px;
+    margin: 30px 0;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 36px;
+    letter-spacing: 12px;
+    margin: 40px 0;
+  }
 `;
 
 function App() {
