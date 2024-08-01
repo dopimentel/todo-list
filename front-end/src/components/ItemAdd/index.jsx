@@ -72,7 +72,7 @@ function ItemAdd() {
         type="text"
         value={ description }
         onChange={ (e) => setDescription(e.target.value) }
-        placeholder="Add a new task"
+        placeholder="Adicione uma tarefa"
       />
       <CustomIconButton onClick={ handleAddTask }><Add /></CustomIconButton>
     </AddTaskContainer>

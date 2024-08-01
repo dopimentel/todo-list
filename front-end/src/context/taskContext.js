@@ -2,6 +2,7 @@ import { createContext, useEffect, useState, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types';
 import tasksApi from '../utils/fetch';
 
+const SUCCESS_STATUS = 200;
 const NOT_FOUND_STATUS = 404;
 
 const TaskContext = createContext();
@@ -45,11 +46,29 @@ export function TaskProvider({ children }) {
     }
   }, [getTasks]);
 
+  const updateTasks = (updatedTask) => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    const newTasks = storedTasks.map((task) => {
+      if (task.id === updatedTask.id) {
+        return updatedTask;
+      }
+      return task;
+    });
+    setTasks(newTasks);
+  };
+
   const toggleCheck = useCallback(async (task) => {
     const { id, description, check } = task;
+    const updateTask = {
+      id,
+      description,
+      check: !check,
+    };
     try {
-      await tasksApi('PUT', `/tasks/${id}`, { id, description, check: !check });
-      await getTasks();
+      const response = await tasksApi('PUT', `/tasks/${id}`, updateTask);
+      if (response.status === SUCCESS_STATUS) {
+        updateTasks(updateTask);
+      }
     } catch (err) {
       console.error(err);
       if (err.response.status === NOT_FOUND_STATUS) {

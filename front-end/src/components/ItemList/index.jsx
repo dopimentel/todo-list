@@ -36,6 +36,7 @@ function ItemList() {
           .map(({ id, description, check }, index) => (
             <ItemRow
               key={ `${index}` }
+              index={ index }
               id={ id }
               description={ description }
               check={ check }

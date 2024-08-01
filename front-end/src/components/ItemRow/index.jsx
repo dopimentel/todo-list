@@ -131,16 +131,20 @@ const IconDeleteButton = styled.button`
   }
 `;
 
-function ItemRow({ id, description, check }) {
+function ItemRow({ id, description, check, index }) {
   const [editMode, setEditMode] = useState(false);
   const [inputDescription, setInputDescription] = useState(description);
 
-  const { toggleCheck, removeTask } = useContext(TaskContext);
+  const { toggleCheck, removeTask, filteredTasks } = useContext(TaskContext);
 
   const editHandle = ({ target: { value } }) => setInputDescription(value);
 
   const editSave = async () => {
-    toggleCheck({ id, description: inputDescription, check: !check });
+    if (inputDescription === filteredTasks[index].description) {
+      setEditMode(false);
+      return;
+    }
+    toggleCheck({ id, description: inputDescription, check: !check }); // Update just the description
     setEditMode(false);
   };
 
@@ -202,6 +206,7 @@ ItemRow.propTypes = {
   id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   check: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default ItemRow;
