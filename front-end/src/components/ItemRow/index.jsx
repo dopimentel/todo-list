@@ -59,6 +59,10 @@ const TaskCheckbox = styled.input`
     transition: opacity 0.2s;
   }
 
+  &:hover {
+    transform: scale(1.1);
+  }
+
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3); /* Focus outline */
@@ -77,6 +81,9 @@ const TaskText = styled.span`
     padding: 5px;  /* Espaçamento interno */
     display: flex;
     align-items: center;  /* Alinha o texto verticalmente */
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
 `;
 
 const TaskInput = styled.input`
@@ -87,6 +94,18 @@ const TaskInput = styled.input`
   border-radius: 4px;
 `;
 
+// const IconButton = styled.button`
+//   background: none;
+//   border: none;
+//   cursor: pointer;
+//   margin-left: 10px;
+
+//   &:hover {
+//     color: ${({ theme }) => theme.primaryColor};
+//     transform: scale(1.1);
+//   }
+// `;
+
 const IconButton = styled.button`
   background: none;
   border: none;
@@ -95,6 +114,20 @@ const IconButton = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
+    transform: scale(1.1);
+  }
+`;
+
+const IconDeleteButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover {
+    color: red;
+    background: white;
+    transform: scale(1.1);
   }
 `;
 
@@ -129,11 +162,11 @@ function ItemRow({ id, description, check }) {
               >
                 <Check />
               </IconButton>
-              <IconButton
+              <IconDeleteButton
                 onClick={ () => setEditMode(false) }
               >
                 <Cancel />
-              </IconButton>
+              </IconDeleteButton>
             </div>
           </>
         )
@@ -153,11 +186,11 @@ function ItemRow({ id, description, check }) {
               >
                 <Edit />
               </IconButton>
-              <IconButton
+              <IconDeleteButton
                 onClick={ () => removeTask(id) }
               >
                 <Delete />
-              </IconButton>
+              </IconDeleteButton>
             </div>
           </>
         )}
