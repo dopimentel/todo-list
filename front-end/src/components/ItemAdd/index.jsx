@@ -1,9 +1,21 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { Add } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 import TaskContext from '../../context/taskContext';
+
+const CustomIconButton = styled(IconButton)`
+  background-color: #4caf50 !important;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 
 const AddTaskContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   margin: 10px;
   @media (min-width: 768px) {
@@ -26,21 +38,21 @@ const TaskInput = styled.input`
   }
 `;
 
-const AddButton = styled.button`
-  padding: 10px;
-  font-size: 16px;
-  color: white;
-  background-color: ${({ theme }) => theme.primaryColor};
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+// const AddButton = styled.button`
+//   padding: 10px;
+//   font-size: 16px;
+//   color: white;
+//   background-color: ${({ theme }) => theme.primaryColor};
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
 
-  &:hover {
-    color: ${({ theme }) => theme.primaryColor};
-    background-color: ${({ theme }) => theme.containerBackground};
-    border: 1px solid ${({ theme }) => theme.primaryColor};
-  }
-`;
+//   &:hover {
+//     color: ${({ theme }) => theme.primaryColor};
+//     background-color: ${({ theme }) => theme.containerBackground};
+//     border: 1px solid ${({ theme }) => theme.primaryColor};
+//   }
+// `;
 
 function ItemAdd() {
   const { addTask } = useContext(TaskContext);
@@ -62,7 +74,7 @@ function ItemAdd() {
         onChange={ (e) => setDescription(e.target.value) }
         placeholder="Add a new task"
       />
-      <AddButton onClick={ handleAddTask }>Add</AddButton>
+      <CustomIconButton onClick={ handleAddTask }><Add /></CustomIconButton>
     </AddTaskContainer>
   );
 }

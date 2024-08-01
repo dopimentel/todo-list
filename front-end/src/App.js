@@ -29,8 +29,7 @@ const Container = styled.div`
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
-  /* background-color: ${theme.containerBackground}; */
-  background-color: #F8F8FF;
+  background-color: ${theme.backgroundColor};
   box-shadow: 0 0 32px rgba(0, 0, 0, 0.6);
   min-height: 100vh;
 

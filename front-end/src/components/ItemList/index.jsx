@@ -30,18 +30,24 @@ function ItemList() {
   });
 
   return (
-    <TaskListContainer>
-      { filteredTasks
-        .length > 0 && filteredTasks
-        .map(({ id, description, check }, index) => (
-          <ItemRow
-            key={ `${index}` }
-            id={ id }
-            description={ description }
-            check={ check }
-          />
-        )) }
-    </TaskListContainer>
+    filteredTasks.length > 0 ? (
+      <TaskListContainer>
+        { filteredTasks
+          .map(({ id, description, check }, index) => (
+            <ItemRow
+              key={ `${index}` }
+              id={ id }
+              description={ description }
+              check={ check }
+            />
+          )) }
+      </TaskListContainer>
+    )
+      : (
+        <p>
+          Nenhuma tarefa
+        </p>
+      )
   );
 }
 
