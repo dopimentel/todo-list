@@ -70,7 +70,7 @@ function ItemAdd() {
 
   const handleAddTask = () => {
     if (!description) {
-      setError('Preencha o campo acima');
+      setError('Erro ao adicionar tarefa');
       setTimeout(() => {
         setError('');
       }, TIME);

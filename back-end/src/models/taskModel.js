@@ -18,6 +18,7 @@ const getAllTasks = async () => {
 const createTask = async (description) => {
     const id = uuid();
     db.run('INSERT INTO tasks (id, description) VALUES (?, ?)', id, description);
+    return { id, description, check: false };
     };
 
 const updateTask = async ({ id, description, check }) => {

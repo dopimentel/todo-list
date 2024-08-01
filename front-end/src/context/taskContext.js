@@ -6,6 +6,7 @@ import tasksApi from '../utils/fetch';
 const SUCCESS_STATUS = 200;
 const NO_CONTENT_STATUS = 204;
 const NOT_FOUND_STATUS = 404;
+const CREATED_STATUS = 201;
 
 const TaskContext = createContext();
 
@@ -31,6 +32,7 @@ export function TaskProvider({ children }) {
     }
     return 'all';
   });
+
   const getTasks = async () => {
     try {
       const { data } = await tasksApi('GET', '/tasks');
@@ -43,10 +45,17 @@ export function TaskProvider({ children }) {
 
   const addTask = async (description) => {
     try {
-      await tasksApi('POST', '/tasks', { description });
-      await getTasks();
+      const response = await tasksApi('POST', '/tasks', { description });
+      console.log(response.data);
+      if (response.status === CREATED_STATUS) {
+        const newTask = response.data;
+        const newTasks = [...tasks, newTask];
+        setTasks(newTasks);
+        saveTasks(newTasks);
+      }
     } catch (err) {
       console.error(err);
+      setError('Erro ao adicionar tarefa');
     }
   };
 

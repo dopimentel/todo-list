@@ -16,8 +16,8 @@ const createTask = async (req, res) => {
         if (!description) {
             return res.status(400).json({ message: 'Description is required' });
         }
-        await taskModel.createTask(description);
-        res.status(201).json({ message: 'Task created successfully' });
+        const newTask = await taskModel.createTask(description);
+        res.status(201).json(newTask);
     }
     catch (err) {
         res.status(500).json({ message: err.message });
