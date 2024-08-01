@@ -55,6 +55,12 @@ export function TaskProvider({ children }) {
     } catch (err) {
       console.error(err);
       setError('Erro ao adicionar tarefa');
+      setTimeout(
+        () => {
+          setError('');
+        },
+        TIME,
+      );
     }
   };
 
