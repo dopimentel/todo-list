@@ -10,7 +10,7 @@ A aplicação está em produção
 
 Front-end: [`https://todo-list-fawn-three-71.vercel.app/`](https://todo-list-fawn-three-71.vercel.app/)
 
-Back-end: [`https://todolist-back-end-681a7158fd6e.herokuapp.com`](https://todolist-back-end-681a7158fd6e.herokuapp.com)
+Back-end: [`https://todolist-back-end-681a7158fd6e.herokuapp.com/tasks`](https://todolist-back-end-681a7158fd6e.herokuapp.com/tasks)
 
 ## Funcionalidades
 
