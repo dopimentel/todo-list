@@ -4,6 +4,14 @@
 
 Esta é uma aplicação Todo List Full-Stack que permite aos usuários adicionar, editar, deletar e filtrar tarefas. A aplicação é responsiva, seguindo a abordagem mobile-first e utiliza React com ContextAPI para gerenciar o estado global. Os componentes são estilizados com styled-components e o design é pensado para proporcionar uma boa experiência de usuário (UX).
 
+## Deploy
+
+A aplicação está em produção
+
+Front-end: [`https://todo-list-fawn-three-71.vercel.app/`](https://todo-list-fawn-three-71.vercel.app/)
+
+Back-end: [`https://todolist-back-end-681a7158fd6e.herokuapp.com`](https://todolist-back-end-681a7158fd6e.herokuapp.com)
+
 ## Funcionalidades
 
 - Adicionar novas tarefas
