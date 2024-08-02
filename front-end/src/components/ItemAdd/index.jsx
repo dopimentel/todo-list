@@ -5,7 +5,7 @@ import { IconButton } from '@mui/material';
 import TaskContext from '../../context/taskContext';
 
 const TIME = 2000;
-const maxLength = 20;
+const maxLength = 200;
 
 const CustomIconButton = styled(IconButton)`
   background-color: #4caf50 !important;
