@@ -1,5 +1,4 @@
 const { db } = require('../config/database');
-console.log(db);
 const uuid = require('uuid').v4;
 
 

@@ -87,11 +87,18 @@ const TaskText = styled.span`
 `;
 
 const TaskInput = styled.input`
+  padding: 10px;
+  font-size: 16px;
   flex: 1;
-  padding: 5px;
-  margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 55vw;
+  @media (min-width: 768px) {
+    width: 30vw;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+
 `;
 
 // const IconButton = styled.button`
@@ -116,6 +123,11 @@ const IconButton = styled.button`
     color: ${({ theme }) => theme.primaryColor};
     transform: scale(1.2);
   }
+`;
+
+const Btns = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const IconDeleteButton = styled.button`
@@ -160,7 +172,7 @@ function ItemRow({ id, description, check, index }) {
                 placeholder="Edit task"
               />
             </div>
-            <div>
+            <Btns>
               <IconButton
                 onClick={ editSave }
               >
@@ -171,7 +183,7 @@ function ItemRow({ id, description, check, index }) {
               >
                 <Cancel />
               </IconDeleteButton>
-            </div>
+            </Btns>
           </>
         )
         : (
@@ -184,7 +196,7 @@ function ItemRow({ id, description, check, index }) {
             <TaskText check={ check }>
               {description}
             </TaskText>
-            <div>
+            <Btns>
               <IconButton
                 onClick={ () => setEditMode(true) }
               >
@@ -195,7 +207,7 @@ function ItemRow({ id, description, check, index }) {
               >
                 <Delete />
               </IconDeleteButton>
-            </div>
+            </Btns>
           </>
         )}
     </TaskRowContainer>

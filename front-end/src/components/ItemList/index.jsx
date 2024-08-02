@@ -26,7 +26,7 @@ function ItemList() {
   const { filteredTasks, filter } = useContext(TaskContext);
 
   useEffect(() => {
-    console.log('tasks:', filteredTasks);
+    // console.log('tasks:', filteredTasks);
   });
 
   return (
