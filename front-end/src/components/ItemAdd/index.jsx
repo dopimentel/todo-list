@@ -5,7 +5,6 @@ import { IconButton } from '@mui/material';
 import TaskContext from '../../context/taskContext';
 
 const TIME = 2000;
-const maxLength = 200;
 
 const CustomIconButton = styled(IconButton)`
   background-color: #4caf50 !important;
@@ -74,22 +73,11 @@ function ItemAdd() {
       setTimeout(() => {
         setError('');
       }, TIME);
+      return;
     }
     addTask(description);
     setDescription('');
     setFilter('all');
-  };
-
-  const handleChange = (e) => {
-    if (e.target.value.length <= maxLength) {
-      setDescription(e.target.value);
-      setError('');
-    } else {
-      setError('Limite de caracteres atingido');
-      setTimeout(() => {
-        setError('');
-      }, TIME);
-    }
   };
 
   return (
@@ -98,7 +86,7 @@ function ItemAdd() {
         <TaskInput
           type="text"
           value={ description }
-          onChange={ handleChange }
+          onChange={ ({ target }) => setDescription(target.value) }
           placeholder={ error ? 'Campo obrigatório' : 'Adicionar tarefa' }
         />
         <CustomIconButton onClick={ handleAddTask }><Add /></CustomIconButton>
