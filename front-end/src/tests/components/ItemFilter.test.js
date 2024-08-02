@@ -16,20 +16,27 @@ beforeEach(() => {
   renderWithContext(<App />);
 });
 
-it('renders ItemAdd component', () => {
-  const inputElement = screen.getByRole('textbox');
-  expect(inputElement).toBeInTheDocument();
+test('renders TaskFilter component', () => {
+  const dropdownElement = screen.getByRole('combobox');
+  expect(dropdownElement).toBeInTheDocument();
 });
 
-it('adds a new task when the Add button is clicked', async () => {
+test('changes filter when a different option is selected', () => {
+  const dropdownElement = screen.getByRole('combobox');
+  fireEvent.change(dropdownElement, { target: { value: 'checked' } });
+  expect(dropdownElement.value).toBe('checked');
+});
+
+test('filters tasks when a different option is selected', () => {
   const inputElement = screen.getByRole('textbox');
   const addButton = screen.getByRole('button');
+  const dropdownElement = screen.getByRole('combobox');
 
   fireEvent.change(inputElement, { target: { value: 'Test Task' } });
   fireEvent.click(addButton);
+  fireEvent.change(dropdownElement, { target: { value: 'checked' } });
 
   waitFor(() => {
-    expect(inputElement.value).toBe('');
-    expect(screen.getByText('Test Task')).toBeInTheDocument();
+    expect(screen.queryByText('Test Task')).not.toBeInTheDocument();
   });
 });
