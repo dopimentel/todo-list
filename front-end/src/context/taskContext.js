@@ -7,14 +7,15 @@ const SUCCESS_STATUS = 200;
 const NO_CONTENT_STATUS = 204;
 const CREATED_STATUS = 201;
 const TIME = 2000;
+const NOT_FOUND_STATUS = 404;
 
 const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem('tasks');
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (savedTasks) {
-      return JSON.parse(savedTasks);
+      return savedTasks;
     }
     return [];
   });
@@ -99,19 +100,20 @@ export function TaskProvider({ children }) {
     try {
       const response = await tasksApi('DELETE', `/tasks/${id}`);
       if (response.status === NO_CONTENT_STATUS) {
-        const newTasks = tasks.filter((task) => task.id !== id);
-        setTasks(newTasks);
-        saveTasks(newTasks);
+        getTasks();
+      }
+      if (response.status === NOT_FOUND_STATUS) {
+        setError('Tarefa não encontrada');
+        setTimeout(
+          () => {
+            setError('');
+          },
+          TIME,
+        );
+        getTasks();
       }
     } catch (err) {
       console.error(err);
-      setError('Erro ao deletar tarefa');
-      setTimeout(
-        () => {
-          setError('');
-        },
-        TIME,
-      );
       getTasks();
     }
   };
