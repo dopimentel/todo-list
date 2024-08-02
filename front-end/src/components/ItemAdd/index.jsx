@@ -65,7 +65,7 @@ const ErrorText = styled.p`
 // `;
 
 function ItemAdd() {
-  const { addTask, error, setError } = useContext(TaskContext);
+  const { addTask, error, setError, setFilter } = useContext(TaskContext);
   const [description, setDescription] = useState('');
 
   const handleAddTask = () => {
@@ -77,6 +77,7 @@ function ItemAdd() {
     }
     addTask(description);
     setDescription('');
+    setFilter('all');
   };
 
   const handleChange = (e) => {
